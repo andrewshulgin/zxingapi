@@ -1,3 +1,4 @@
+from base64 import b64encode
 from io import BytesIO
 
 from fastapi import FastAPI, UploadFile, responses
@@ -37,7 +38,7 @@ async def read(
     )
     return [
         {
-            "bytes": result.bytes,
+            "base64": b64encode(result.bytes),
             "content_type": result.content_type.name,
             "format": result.format.name,
             "orientation": result.orientation,
