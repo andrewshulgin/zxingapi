@@ -70,8 +70,8 @@ async def write(
 ):
     try:
         barcode_format = zxingcpp.barcode_format_from_str(format)
-        if barcode_format is None:
-            raise ValueError("Format not specified")
+        if barcode_format == zxingcpp.BarcodeFormat.NONE:
+            raise ValueError("This is not a valid barcode format: {}".format(format))
     except ValueError as e:
         response.status_code = 400
         return responses.JSONResponse({"error": str(e)})
